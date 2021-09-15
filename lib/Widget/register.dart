@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -41,14 +40,14 @@ class _register extends State<register> {
       return 'the Filed cant be empty';
     }
   }
-  closth() async {
+  register_add() async {
 
     var data = {
       "Password": Password.text,
       "Name": Name.text,
       "Email": Email.text,
     };
-    var url = "http://10.0.2.2/Restuarant/add.php";
+    var url = "http://10.0.2.2/register/add.php";
     var response = await http.post(url, body: data);
     var responsebody = jsonDecode(response.body);
     if (responsebody['status'] == "success") {
@@ -82,7 +81,7 @@ class _register extends State<register> {
                         padding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         color: Colors.blue,
-                        onPressed: closth,
+                        onPressed: register_add,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
@@ -137,42 +136,7 @@ class _register extends State<register> {
                 ],),
             )),),
     );}
-/*
-  bulidFormBox(double mdv) {
-    return Center(
-      child: Container(
-        height: 400,
-        width: double.infinity,
-        decoration: BoxDecoration(color: Colors.white70, boxShadow: [
-          BoxShadow(
-            color: Colors.black,
-            spreadRadius: 20,
-            blurRadius: 10,
-            offset: Offset(1, 1),
-          ),
-        ]),
-        child: Form(
-          key: formstateregister,
-          child: Container(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  buildTextFormFieldAll(
-                    "  Name ",
-                    false,
-                    Name,
-                    validName,
-                  ),
-                  buildTextFormFieldAll("Password", true, Password, validpass),
-                  buildTextFormFieldAll("Email", false, Email, validEmail),
-                ]),
-            //  buildTextFormFieldAll(),
-          ),
-        ),
-      ),
-    );
-  }
-*/
+
   TextFormField buildTextFormFieldAll(String myhinttext, bool pass,
       TextEditingController myController, myvalid) {
     return TextFormField(
